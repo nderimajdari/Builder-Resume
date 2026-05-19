@@ -1878,6 +1878,7 @@ body.editor-page {
     repeating-linear-gradient(to bottom, transparent 0 16px, rgba(255,255,255,0.55) 16px 18px, transparent 18px 28px) right 12px top 58px / 18px 104px no-repeat;
 }
 
+<<<<<<< HEAD
 .thumb-software-engineer::before {
   background:
     linear-gradient(#0b1220, #0b1220) 0 0 / 100% 52px no-repeat,
@@ -1917,6 +1918,8 @@ body.editor-page {
     repeating-linear-gradient(to bottom, transparent 0 14px, rgba(255,255,255,0.6) 14px 17px, transparent 17px 26px) 12px 72px / 22px 96px no-repeat;
 }
 
+=======
+>>>>>>> 38e3637793ee11ca7c918850b8ae4599060b62e2
 .color-picker-group {
   display: flex;
   align-items: center;
@@ -2646,7 +2649,10 @@ input:checked + .slider:before {
 /* Template layout wrappers that should stretch to fill the printed page */
 .tmpl-modern-right .mr-container,
 .tmpl-portfolio .pf-shell,
+<<<<<<< HEAD
 .tmpl-freelancer .fl-shell,
+=======
+>>>>>>> 38e3637793ee11ca7c918850b8ae4599060b62e2
 .tmpl-clean-sidebar .cs-layout {
   flex: 1;
 }
@@ -2697,11 +2703,15 @@ input:checked + .slider:before {
 .resume-page.pdf-exporting .ep-avatar,
 .resume-page.pdf-exporting .mr-avatar,
 .resume-page.pdf-exporting .nx-avatar,
+<<<<<<< HEAD
 .resume-page.pdf-exporting .pf-avatar,
 .resume-page.pdf-exporting .se-avatar,
 .resume-page.pdf-exporting .qa-avatar,
 .resume-page.pdf-exporting .st-avatar,
 .resume-page.pdf-exporting .fl-avatar {
+=======
+.resume-page.pdf-exporting .pf-avatar {
+>>>>>>> 38e3637793ee11ca7c918850b8ae4599060b62e2
   object-fit: cover;
   flex-shrink: 0;
 }
@@ -4856,10 +4866,13 @@ body.landing-page .tp-mono-new,
 body.landing-page .tp-compact-new,
 body.landing-page .tp-portfolio-new,
 body.landing-page .tp-graduate-new,
+<<<<<<< HEAD
 body.landing-page .tp-software-engineer-new,
 body.landing-page .tp-qa-engineer-new,
 body.landing-page .tp-student-new,
 body.landing-page .tp-freelancer-new,
+=======
+>>>>>>> 38e3637793ee11ca7c918850b8ae4599060b62e2
 body.landing-page .tp-clean-sidebar-new,
 body.landing-page .tp-editorial-new {
   padding: 18px;
@@ -4965,6 +4978,7 @@ body.landing-page .tp-graduate-new {
   text-align: center;
 }
 
+<<<<<<< HEAD
 body.landing-page .tp-software-engineer-new {
   background: #0b1220;
 }
@@ -5034,6 +5048,8 @@ body.landing-page .tp-freelance-main {
     repeating-linear-gradient(to bottom, #e5e7eb 0 7px, transparent 7px 18px) 18px 72px / 108px 96px no-repeat;
 }
 
+=======
+>>>>>>> 38e3637793ee11ca7c918850b8ae4599060b62e2
 body.landing-page .tp-grad-title {
   width: 62%;
   height: 13px;
@@ -7127,6 +7143,7 @@ body.landing-page .cta-content p {
   font-weight: 850;
 }
 
+<<<<<<< HEAD
 /* ---- SOFTWARE ENGINEER TEMPLATE ---- */
 .tmpl-software-engineer {
   font-family: 'Inter', sans-serif;
@@ -7575,6 +7592,8 @@ body.landing-page .cta-content p {
   letter-spacing: 0.08em;
 }
 
+=======
+>>>>>>> 38e3637793ee11ca7c918850b8ae4599060b62e2
 /* ---- CLEAN SIDEBAR TEMPLATE ---- */
 .tmpl-clean-sidebar {
   font-family: 'Inter', sans-serif;
@@ -7728,9 +7747,12 @@ body.landing-page .cta-content p {
 
 @media print {
   .tmpl-portfolio .pf-side { background: #102033 !important; print-color-adjust: exact; }
+<<<<<<< HEAD
   .tmpl-software-engineer .se-sidebar { background: #4a4a4a !important; print-color-adjust: exact; }
   .tmpl-software-engineer .se-name-block { background: #ff914d !important; print-color-adjust: exact; }
   .tmpl-freelancer .fl-side { background: #111827 !important; print-color-adjust: exact; }
+=======
+>>>>>>> 38e3637793ee11ca7c918850b8ae4599060b62e2
   .tmpl-clean-sidebar .cs-side { background: #f1f5f9 !important; print-color-adjust: exact; }
 }
 
@@ -7968,16 +7990,22 @@ body.landing-page .cta-content p {
   .tmpl-traditional-serif,
   .tmpl-europass,
   .tmpl-modern-right,
+<<<<<<< HEAD
   .tmpl-software-engineer,
   .tmpl-qa-engineer,
   .tmpl-student,
+=======
+>>>>>>> 38e3637793ee11ca7c918850b8ae4599060b62e2
   .tmpl-nordic,
   .tmpl-timeline,
   .tmpl-mono,
   .tmpl-compact,
   .tmpl-portfolio,
   .tmpl-graduate,
+<<<<<<< HEAD
   .tmpl-freelancer,
+=======
+>>>>>>> 38e3637793ee11ca7c918850b8ae4599060b62e2
   .tmpl-clean-sidebar,
   .tmpl-editorial {
     padding-left: clamp(24px, 6vw, 40px);
@@ -7998,16 +8026,22 @@ body.landing-page .cta-content p {
   .tmpl-traditional-serif .ts-title,
   .tmpl-europass .ep-name,
   .tmpl-modern-right .mr-title,
+<<<<<<< HEAD
   .tmpl-software-engineer .se-name,
   .tmpl-qa-engineer .qa-name,
   .tmpl-student .st-name,
+=======
+>>>>>>> 38e3637793ee11ca7c918850b8ae4599060b62e2
   .tmpl-nordic .r-name,
   .tmpl-timeline .tl-title,
   .tmpl-mono .mo-title,
   .tmpl-compact .cp-title,
   .tmpl-portfolio .pf-title,
   .tmpl-graduate .gr-title,
+<<<<<<< HEAD
   .tmpl-freelancer .fl-title,
+=======
+>>>>>>> 38e3637793ee11ca7c918850b8ae4599060b62e2
   .tmpl-clean-sidebar .cs-title,
   .tmpl-editorial .ed-name {
     font-size: clamp(1.7rem, 8vw, 2.45rem);
@@ -8051,6 +8085,7 @@ body.landing-page .cta-content p {
     padding-left: 0;
     padding-bottom: 8px;
   }
+<<<<<<< HEAD
 
   .tmpl-software-engineer {
     padding: 0;
@@ -8072,6 +8107,8 @@ body.landing-page .cta-content p {
   .tmpl-software-engineer .se-main {
     padding-top: 42px;
   }
+=======
+>>>>>>> 38e3637793ee11ca7c918850b8ae4599060b62e2
 }
 
 /* PDF export must always render from the full desktop/A4 layout. */
@@ -8115,6 +8152,7 @@ html.is-pdf-exporting .resume-page.pdf-exporting.tmpl-editorial .r-section {
   gap: 28px !important;
 }
 
+<<<<<<< HEAD
 html.is-pdf-exporting .resume-page.pdf-exporting.tmpl-software-engineer {
   padding: 0 !important;
 }
@@ -8133,6 +8171,8 @@ html.is-pdf-exporting .resume-page.pdf-exporting.tmpl-software-engineer .se-name
   print-color-adjust: exact;
 }
 
+=======
+>>>>>>> 38e3637793ee11ca7c918850b8ae4599060b62e2
 /* ===================== HOMEPAGE REDESIGN ===================== */
 body.landing-page {
   --home-ink: #172033;
@@ -8575,6 +8615,7 @@ body.landing-page .hero-mini-panel-bottom {
     display: none;
   }
 }
+<<<<<<< HEAD
 
 /* ===================== REDESIGNED MULTI-COLUMN FOOTER ===================== */
 .footer {
@@ -8881,3 +8922,5 @@ body.landing-page .footer-copy {
   }
 }
 
+=======
+>>>>>>> 38e3637793ee11ca7c918850b8ae4599060b62e2
