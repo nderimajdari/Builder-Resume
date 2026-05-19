@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | ResumeElite</title>
+  <meta name="description" content="Have questions, suggestions, or feedback? Get in touch with the ResumeElite team via our official email address or by submitting our contact form." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="ResumeElite" />
+  <meta name="theme-color" content="#0f172a" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=homepage-redesign-20260515" />
+</head>
+
+<body class="landing-page info-page">
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">RE</span>
+        <span class="logo-text">ResumeElite</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html#templates">Templates</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#process">How it works</a>
+        <a href="editor.html" class="btn-nav-cta">Open Builder</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Content Container -->
+  <main class="info-page-container">
+    <div class="info-header">
+      <h1>Contact Us</h1>
+      <p class="info-updated">We'd love to hear from you. Get in touch with our team.</p>
+    </div>
+    
+    <div class="info-card">
+      <div class="contact-grid">
+        <!-- Contact Details -->
+        <div class="contact-info-block">
+          <h2>Get in Touch</h2>
+          <p>Whether you have general questions about using our builder, feedback about a specific template, or want to suggest new features, we are here to help! Simply fill out the contact form, and our team will review your submission.</p>
+          
+          <div class="contact-card">
+            <h3>Support Response Time</h3>
+            <p>We review all submissions continuously and strive to respond to all inquiries within 24 to 48 business hours.</p>
+          </div>
+          
+          <div class="contact-card">
+            <h3>Operational Hours</h3>
+            <p>Monday – Friday: 9:00 AM – 5:00 PM EST</p>
+            <p>Saturday – Sunday: Closed</p>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-block">
+          <h3>Send a Message</h3>
+          <form class="contact-form" id="contact-form" method="POST">
+            <!-- Honeypot field to prevent spam -->
+            <input type="text" name="_honey" style="display:none">
+            
+            <!-- Disable captcha for friction-free UX -->
+            <input type="hidden" name="_captcha" value="false">
+            
+            <!-- Email subject -->
+            <input type="hidden" name="_subject" value="New message from ResumeElite contact form!">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-name">Your Name</label>
+                <input type="text" id="contact-name" name="name" placeholder="John Doe" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-email">Email Address</label>
+                <input type="email" id="contact-email" name="email" placeholder="john@example.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="contact-subject">Subject</label>
+              <input type="text" id="contact-subject" name="subject" placeholder="Feedback, bug report, suggestion..." required />
+            </div>
+            <div class="form-group">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" name="message" rows="5" placeholder="How can we help you?" required></textarea>
+            </div>
+            <button type="submit" class="btn-contact-submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const form = document.getElementById("contact-form");
+      if (form) {
+        // Obfuscate the destination email address using JavaScript variables
+        // This hides the address from simple source code inspection and static site crawlers
+        const user = "resumeelite";
+        const domain = "gmail.com";
+        form.action = `https://formsubmit.co/${user}@${domain}`;
+        
+        // Dynamically build the redirect URL to match either local development port or live environment domain
+        const redirectInput = document.createElement("input");
+        redirectInput.type = "hidden";
+        redirectInput.name = "_next";
+        redirectInput.value = `${window.location.origin}${window.location.pathname}?success=true`;
+        form.appendChild(redirectInput);
+      }
+
+      // Check if URL parameters signify a successful form submission
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("success") === "true") {
+        const formBlock = document.querySelector(".contact-form-block");
+        if (formBlock) {
+          formBlock.innerHTML = `
+            <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 32px; text-align: center; margin-top: 10px;">
+              <span style="font-size: 2.5rem; display: block; margin-bottom: 12px; filter: grayscale(0.2);">✅</span>
+              <h3 style="color: #065f46; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; font-family: 'Inter', sans-serif;">Message Sent Successfully!</h3>
+              <p style="color: #374151; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">Thank you for contacting ResumeElite. We have received your message and our team will get back to you shortly.</p>
+              <a href="contact.html" style="display: inline-block; background: linear-gradient(135deg, #102033, #1d4ed8); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-size: 0.88rem; font-weight: 600; box-shadow: 0 4px 12px rgba(29, 78, 216, 0.15); transition: opacity 0.2s;">Send Another Message</a>
+            </div>
+          `;
+        }
+      }
+    });
+  </script>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-icon">RE</span>
+            <span class="logo-text">ResumeElite</span>
+          </a>
+          <p>Create professional, ATS-friendly resumes in minutes with our clean, elegant templates. Free, and no signup required.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#templates">Resume Templates</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="index.html#process">How It Works</a></li>
+            <li><a href="editor.html">Open Resume Builder</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal & Support</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="disclaimer.html">Disclaimer</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 ResumeElite. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
