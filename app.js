@@ -1149,6 +1149,17 @@ function buildTemplateHtml(tmpl) {
     case 'freelancer': return buildFreelancer();
     case 'clean-sidebar': return buildCleanSidebar();
     case 'editorial': return buildEditorial();
+    case 'ats-friendly': return buildAtsFriendly();
+    case 'latex-style': return buildLatexStyle();
+    case 'harvard-style': return buildHarvardStyle();
+    case 'federal-style': return buildFederalStyle();
+    case 'functional': return buildFunctional();
+    case 'chronological': return buildChronological();
+    case 'consulting-style': return buildConsultingStyle();
+    case 'academic-cv': return buildAcademicCv();
+    case 'infographic': return buildInfographic();
+    case 'modern-executive': return buildModernExecutive();
+    case 'elite': return buildElite();
     default: return buildClassic();
   }
 }
@@ -1340,7 +1351,7 @@ function avatarHtml(cls = 'r-avatar', phClass = 'r-avatar-placeholder') {
 
 function getIcon(type, tmpl) {
   const isSolid = (tmpl === 'modern-dark' || tmpl === 'bold');
-  const svgIcons = ['modern', 'tech', 'software-engineer', 'qa-engineer', 'student', 'freelancer', 'professional', 'corporate', 'modern-dark', 'elegant', 'executive', 'startup', 'classic-blue', 'minimal-formal', 'traditional-serif', 'europass', 'modern-right', 'nordic', 'timeline', 'mono', 'compact', 'portfolio', 'graduate', 'clean-sidebar', 'editorial'];
+  const svgIcons = ['modern', 'tech', 'software-engineer', 'qa-engineer', 'student', 'freelancer', 'professional', 'corporate', 'modern-dark', 'elegant', 'executive', 'startup', 'classic-blue', 'minimal-formal', 'traditional-serif', 'europass', 'modern-right', 'nordic', 'timeline', 'mono', 'compact', 'portfolio', 'graduate', 'clean-sidebar', 'editorial', 'ats-friendly', 'latex-style', 'harvard-style', 'federal-style', 'functional', 'chronological', 'consulting-style', 'academic-cv', 'infographic', 'modern-executive', 'elite'];
   
   const outlinePaths = {
     email: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',
@@ -1354,6 +1365,11 @@ function getIcon(type, tmpl) {
     gender: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
     nationality: '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>',
     civil: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/>',
+    calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+    star: '<polygon points="12 2 15 8.5 22 9.3 16.8 14 18.2 21 12 17.3 5.8 21 7.2 14 2 9.3 9 8.5 12 2"/>',
+    quality: '<path d="M9 12l2 2 4-5"/><path d="M12 2l2.4 2.2 3.2-.4.5 3.2 2.7 1.7-1.4 2.9 1.4 2.9-2.7 1.7-.5 3.2-3.2-.4L12 22l-2.4-2.2-3.2.4-.5-3.2-2.7-1.7 1.4-2.9-1.4-2.9 2.7-1.7.5-3.2 3.2.4L12 2z"/>',
+    flag: '<path d="M4 22V4"/><path d="M4 4c3-2 6 2 9 0s5 0 7 1v10c-2-1-4-3-7-1s-6-2-9 0"/>',
+    idea: '<path d="M9 18h6"/><path d="M10 22h4"/><path d="M8.5 14.5A6 6 0 1 1 15.5 14.5c-.8.6-1.2 1.4-1.2 2.5H9.7c0-1.1-.4-1.9-1.2-2.5z"/>',
     custom: '<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>'
   };
 
@@ -3419,7 +3435,7 @@ function buildGraduate() {
 
 // ---- Software Engineer ----
 function buildSoftwareEngineer() {
-  const sideSections = ['experience', 'education', 'certifications', 'achievements', 'custom'];
+  const sideSections = ['experience', 'education', 'certifications', 'achievements'];
   const mainSections = orderedVisibleSectionIds(state.sectionOrder).filter(id => !sideSections.includes(id));
   return `
     <div class="se-layout">
@@ -3435,17 +3451,34 @@ function buildSoftwareEngineer() {
         ${renderSoftwareEngineerSections(mainSections)}
         <div class="se-contact-section">
           <div class="r-section-title">Contact</div>
-          <div class="se-contact-grid">${resumeContactItems('software-engineer')}</div>
+          <div class="se-contact-grid">${softwareEngineerContactItems()}</div>
         </div>
       </main>
     </div>
   `;
 }
 
+function softwareEngineerContactItems() {
+  const p = state.personal;
+  return [
+    p.phone ? `<span><strong>Phone:</strong> ${linkify('phone', p.phone)}</span>` : '',
+    p.email ? `<span><strong>E-mail:</strong> ${linkify('email', p.email)}</span>` : '',
+    p.linkedin ? `<span><strong>Social:</strong> ${linkify('linkedin', p.linkedin)}</span>` : '',
+    p.website ? `<span><strong>Website:</strong> ${linkify('website', p.website)}</span>` : '',
+    (p.city || p.country) ? `<span><strong>Location:</strong> ${esc([p.city, p.country].filter(Boolean).join(', '))}</span>` : ''
+  ].filter(Boolean).join('');
+}
+
 function renderSoftwareEngineerSections(ids) {
   const seSectionMap = {
     ...sectionMap,
-    skills: softwareEngineerSkillsSection
+    experience: softwareEngineerSidebarExperienceSection,
+    education: softwareEngineerSidebarEducationSection,
+    certifications: softwareEngineerSidebarCertificationSection,
+    achievements: softwareEngineerAdditionalSection,
+    custom: softwareEngineerAdditionalSection,
+    skills: softwareEngineerSkillsSection,
+    projects: softwareEngineerProjectSection
   };
 
   return orderedVisibleSectionIds(ids)
@@ -3471,20 +3504,186 @@ function softwareEngineerSkillsSection() {
   return `<div class="r-section se-skills-section">${sectionTitle('Technical Skills')}<div class="se-skill-bars">${rows}</div></div>`;
 }
 
+function softwareEngineerSidebarExperienceSection() {
+  const list = state.experience.filter(e => e.position || e.company);
+  if (!list.length) return '';
+  const items = list.map(e => `
+    <div class="se-side-item">
+      <div class="se-side-title">${esc(e.position)}</div>
+      <div class="se-side-meta">${[e.company, e.location].filter(Boolean).map(esc).join(' — ')}</div>
+      <div class="se-side-date">${e.startDate ? `${esc(e.startDate)} - ${esc(e.endDate) || 'Present'}` : ''}</div>
+    </div>`).join('');
+  return `<div class="r-section se-side-section">${sectionTitle('Work Experience')}${items}</div>`;
+}
+
+function softwareEngineerSidebarEducationSection() {
+  const list = state.education.filter(e => e.degree || e.institution);
+  if (!list.length) return '';
+  const items = list.map(e => `
+    <div class="se-side-item">
+      <div class="se-side-title">${esc(e.degree)}${e.field ? ` ${esc(e.field)}` : ''}</div>
+      <div class="se-side-meta">${esc(e.institution)}</div>
+      <div class="se-side-date">${e.startDate ? `${esc(e.startDate)} - ${esc(e.endDate) || ''}` : ''}</div>
+    </div>`).join('');
+  return `<div class="r-section se-side-section">${sectionTitle('Education')}${items}</div>`;
+}
+
+function softwareEngineerSidebarCertificationSection() {
+  const list = state.certifications.filter(c => c.name || c.issuer);
+  if (!list.length) return '';
+  const items = list.map(c => `
+    <div class="se-side-item">
+      <div class="se-side-title">${esc(c.name)}</div>
+      <div class="se-side-meta">${esc(c.issuer)}${c.date ? ` ${esc(c.date)}` : ''}</div>
+    </div>`).join('');
+  return `<div class="r-section se-side-section">${sectionTitle('Certifications')}${items}</div>`;
+}
+
+function softwareEngineerAdditionalSection() {
+  const bits = [
+    ...state.achievements.filter(a => a.name || a.description).map(a => a.description || a.name),
+    state.custom.content
+  ].filter(Boolean);
+  if (!bits.length) return '';
+  const items = bits.map(item => `<li>${esc(item)}</li>`).join('');
+  return `<div class="r-section se-side-section">${sectionTitle('Additional Information')}<ul class="se-additional">${items}</ul></div>`;
+}
+
+function softwareEngineerProjectSection() {
+  const list = state.projects.filter(p => p.name && p.name.trim());
+  if (!list.length) return '';
+  const items = list.map(pr => `
+    <div class="se-project">
+      <div class="se-project-title">${esc(pr.name)}</div>
+      ${pr.description ? `<div class="se-project-desc">${formatBullets(pr.description)}</div>` : ''}
+    </div>`).join('');
+  return `<div class="r-section">${sectionTitle('Projects')}${items}</div>`;
+}
+
 // ---- Quality Assurance Engineer ----
 function buildQaEngineer() {
+  const leftSections = ['summary', 'experience', 'education', 'courses', 'certifications', 'projects', 'internships', 'activities', 'custom', 'signature', 'footer'];
+  const rightSections = ['languages', 'achievements', 'skills', 'hobbies', 'references'];
   return `
-    <div class="qa-header">
-      <div>
-        <div class="qa-label">Quality Assurance</div>
+    <div class="qa-page">
+      <div class="qa-dot-field"></div>
+      <header class="qa-header">
         <div class="qa-name">${getName()}</div>
         <div class="qa-title">${getTitle()}</div>
+        <div class="qa-contact">${resumeContactItems('qa-engineer')}</div>
+      </header>
+      <div class="qa-body">
+        <main class="qa-main-col">${renderQaEngineerSections(leftSections)}</main>
+        <aside class="qa-side-col">${renderQaEngineerSections(rightSections)}</aside>
       </div>
-      ${state.photo ? avatarHtml('qa-avatar', 'qa-avatar-placeholder') : '<div class="qa-checkmark">OK</div>'}
     </div>
-    <div class="qa-contact">${resumeContactItems('qa-engineer')}</div>
-    <div class="qa-body">${renderOrderedSections(state.sectionOrder)}</div>
   `;
+}
+
+function renderQaEngineerSections(ids) {
+  const qaSectionMap = {
+    ...sectionMap,
+    summary: () => state.summary ? `<div class="r-section">${sectionTitle('Summary')}<p class="r-summary">${esc(state.summary)}</p></div>` : '',
+    experience: qaExperienceSection,
+    education: qaEducationSection,
+    languages: qaLanguageSection,
+    achievements: qaAchievementSection,
+    skills: qaSkillsSection,
+    qualities: qaSkillsSection,
+    hobbies: qaInterestSection,
+    courses: qaCourseSection
+  };
+
+  return orderedVisibleSectionIds(ids)
+    .map(id => qaSectionMap[id] ? qaSectionMap[id]() : '')
+    .join('');
+}
+
+function qaExperienceSection() {
+  const list = state.experience.filter(e => e.position || e.company);
+  if (!list.length) return '';
+  const items = list.map(e => `
+    <div class="qa-item">
+      <div class="qa-item-title">${esc(e.position)}</div>
+      <div class="qa-item-meta">
+        ${e.company ? `<span class="qa-company">${esc(e.company)}</span>` : ''}
+        ${e.startDate ? `<span>${getIcon('calendar', 'qa-engineer')} ${esc(e.startDate)} - ${esc(e.endDate) || 'Present'}</span>` : ''}
+        ${e.location ? `<span>${getIcon('location', 'qa-engineer')} ${esc(e.location)}</span>` : ''}
+      </div>
+      ${e.description ? `<div class="qa-item-desc">${formatBullets(e.description)}</div>` : ''}
+    </div>`).join('');
+  return `<div class="r-section">${sectionTitle('Experience')}${items}</div>`;
+}
+
+function qaEducationSection() {
+  const list = state.education.filter(e => e.degree || e.institution);
+  if (!list.length) return '';
+  const items = list.map(e => `
+    <div class="qa-item">
+      <div class="qa-item-title">${esc(e.degree)}${e.field ? ' in ' + esc(e.field) : ''}</div>
+      <div class="qa-item-meta">
+        ${e.institution ? `<span class="qa-company">${esc(e.institution)}</span>` : ''}
+        ${e.startDate ? `<span>${getIcon('calendar', 'qa-engineer')} ${esc(e.startDate)} - ${esc(e.endDate) || 'Present'}</span>` : ''}
+        ${e.location ? `<span>${getIcon('location', 'qa-engineer')} ${esc(e.location)}</span>` : ''}
+      </div>
+      ${e.description ? `<div class="qa-item-desc">${formatBullets(e.description)}</div>` : ''}
+    </div>`).join('');
+  return `<div class="r-section">${sectionTitle('Education')}${items}</div>`;
+}
+
+function qaCourseSection() {
+  const list = state.courses.filter(c => c.name || c.institution);
+  if (!list.length) return '';
+  const items = list.map(c => `
+    <div class="qa-course">
+      <div class="qa-course-name">${esc(c.name)}</div>
+      <div class="qa-course-meta">${esc(c.institution)}${c.date ? ` in ${esc(c.date)}` : ''}</div>
+    </div>`).join('');
+  return `<div class="r-section">${sectionTitle('Training / Courses')}<div class="qa-courses">${items}</div></div>`;
+}
+
+function qaLanguageSection() {
+  const list = state.languages.filter(l => l.name && l.name.trim());
+  if (!list.length) return '';
+  const rows = list.map((l, index) => {
+    const raw = Number.parseInt(l.proficiency, 10);
+    const filled = Number.isFinite(raw) ? Math.max(1, Math.min(6, Math.round(raw / 17))) : (index === 0 ? 6 : 4);
+    const dots = Array.from({ length: 6 }, (_, i) => `<span class="${i < filled ? 'is-filled' : ''}"></span>`).join('');
+    return `<div class="qa-lang-row"><span>${esc(l.name)}</span><em>${esc(l.proficiency || '')}</em><div class="qa-lang-dots">${dots}</div></div>`;
+  }).join('');
+  return `<div class="r-section">${sectionTitle('Languages')}<div class="qa-languages">${rows}</div></div>`;
+}
+
+function qaAchievementSection() {
+  const list = state.achievements.filter(a => a.name && a.name.trim());
+  if (!list.length) return '';
+  const icons = ['star', 'quality', 'flag', 'idea'];
+  const items = list.map((a, index) => `
+    <div class="qa-achievement">
+      <div class="qa-achievement-icon">${getIcon(icons[index % icons.length], 'qa-engineer')}</div>
+      <div>
+        <div class="qa-achievement-title">${esc(a.name)}</div>
+        ${a.description ? `<div class="qa-achievement-desc">${esc(a.description)}</div>` : ''}
+      </div>
+    </div>`).join('');
+  return `<div class="r-section">${sectionTitle('Key Achievements')}${items}</div>`;
+}
+
+function qaSkillsSection() {
+  const skillList = state.skills.filter(s => s.name && s.name.trim()).map(s => s.name);
+  const qualityList = state.qualities.filter(q => q.name && q.name.trim()).map(q => q.name);
+  const list = [...skillList, ...qualityList].filter((name, index, arr) => arr.indexOf(name) === index);
+  if (!list.length) return '';
+  return `<div class="r-section">${sectionTitle('Skills')}<div class="qa-skill-list">${list.map(name => `<span>${esc(name)}</span>`).join('')}</div></div>`;
+}
+
+function qaInterestSection() {
+  if (!state.hobbies) return '';
+  const items = state.hobbies.split('\n').map(line => line.trim()).filter(Boolean);
+  const content = items.length > 1
+    ? items.map(item => `<div class="qa-interest">${esc(item)}</div>`).join('')
+    : `<div class="qa-interest">${esc(state.hobbies)}</div>`;
+  return `<div class="r-section">${sectionTitle('Interests')}${content}</div>`;
 }
 
 // ---- Student ----
@@ -3537,6 +3736,241 @@ function buildCleanSidebar() {
   `;
 }
 
+// ---- ATS Friendly ----
+function buildAtsFriendly() {
+  return `
+    <div class="ats-wrapper">
+      <div class="ats-header">
+        <h1 class="ats-name">${getName()}</h1>
+        <div class="ats-title">${getTitle()}</div>
+        <div class="ats-contact">${resumeContactItems('ats-friendly')}</div>
+      </div>
+      <div class="ats-body">
+        ${renderOrderedSections(['summary', 'experience', 'education', 'skills', 'languages', 'certifications', 'projects', 'internships', 'activities', 'hobbies', 'courses', 'references', 'qualities', 'achievements', 'custom', 'signature', 'footer'])}
+      </div>
+    </div>
+  `;
+}
+
+// ---- LaTeX Style ----
+function buildLatexStyle() {
+  return `
+    <div class="latex-wrapper">
+      <div class="latex-header">
+        <h1 class="latex-name">${getName()}</h1>
+        <div class="latex-title">${getTitle()}</div>
+        <div class="latex-contact">${resumeContactItems('latex-style')}</div>
+      </div>
+      <div class="latex-body">
+        ${renderOrderedSections(['summary', 'experience', 'education', 'skills', 'languages', 'certifications', 'projects', 'internships', 'activities', 'hobbies', 'courses', 'references', 'qualities', 'achievements', 'custom', 'signature', 'footer'])}
+      </div>
+    </div>
+  `;
+}
+
+// ---- Harvard Style ----
+function buildHarvardStyle() {
+  return `
+    <div class="harvard-wrapper">
+      <div class="harvard-header">
+        <h1 class="harvard-name">${getName()}</h1>
+        <div class="harvard-title">${getTitle()}</div>
+        <div class="harvard-contact">${resumeContactItems('harvard-style')}</div>
+      </div>
+      <div class="harvard-body">
+        ${renderOrderedSections(['summary', 'experience', 'education', 'skills', 'languages', 'certifications', 'projects', 'internships', 'activities', 'hobbies', 'courses', 'references', 'qualities', 'achievements', 'custom', 'signature', 'footer'])}
+      </div>
+    </div>
+  `;
+}
+
+// ---- Federal Style ----
+function buildFederalStyle() {
+  const p = state.personal;
+  const metaItems = [
+    p.dob ? `<div><strong>Date of Birth:</strong> ${esc(p.dob)}</div>` : '',
+    p.pob ? `<div><strong>Place of Birth:</strong> ${esc(p.pob)}</div>` : '',
+    p.nationality ? `<div><strong>Citizenship/Nationality:</strong> ${esc(p.nationality)}</div>` : '',
+    p.driverLicense ? `<div><strong>Driver's License:</strong> ${esc(p.driverLicense)}</div>` : '',
+    p.gender ? `<div><strong>Gender:</strong> ${esc(p.gender)}</div>` : '',
+    p.civilStatus ? `<div><strong>Civil Status:</strong> ${esc(p.civilStatus)}</div>` : '',
+    p.customField ? `<div><strong>Security/Clearance:</strong> ${esc(p.customField)}</div>` : ''
+  ].filter(Boolean).join('');
+  
+  const metaBlock = metaItems ? `<div class="fed-meta-block">${metaItems}</div>` : '';
+  
+  return `
+    <div class="fed-wrapper">
+      <div class="fed-header">
+        <h1 class="fed-name">${getName()}</h1>
+        <div class="fed-title">${getTitle()}</div>
+        <div class="fed-contact">${resumeContactItems('federal-style')}</div>
+        ${metaBlock}
+      </div>
+      <div class="fed-body">
+        ${renderOrderedSections(['summary', 'experience', 'education', 'skills', 'languages', 'certifications', 'projects', 'internships', 'activities', 'hobbies', 'courses', 'references', 'qualities', 'achievements', 'custom', 'signature', 'footer'])}
+      </div>
+    </div>
+  `;
+}
+
+// ---- Functional ----
+function buildFunctional() {
+  const otherSections = ['summary', 'experience', 'education', 'languages', 'certifications', 'projects', 'internships', 'activities', 'hobbies', 'courses', 'references', 'qualities', 'achievements', 'custom', 'signature', 'footer'];
+  return `
+    <div class="func-wrapper">
+      <div class="func-header">
+        <h1 class="func-name">${getName()}</h1>
+        <div class="func-title">${getTitle()}</div>
+        <div class="func-contact">${resumeContactItems('functional')}</div>
+      </div>
+      <div class="func-body">
+        ${renderOrderedSections(['skills'])}
+        ${renderOrderedSections(otherSections)}
+      </div>
+    </div>
+  `;
+}
+
+// ---- Chronological ----
+function buildChronological() {
+  return `
+    <div class="chron-wrapper">
+      <div class="chron-header">
+        <h1 class="chron-name">${getName()}</h1>
+        <div class="chron-title">${getTitle()}</div>
+        <div class="chron-contact">${resumeContactItems('chronological')}</div>
+      </div>
+      <div class="chron-body">
+        ${renderOrderedSections(['summary', 'experience', 'education', 'skills', 'languages', 'certifications', 'projects', 'internships', 'activities', 'hobbies', 'courses', 'references', 'qualities', 'achievements', 'custom', 'signature', 'footer'])}
+      </div>
+    </div>
+  `;
+}
+
+// ---- Consulting Style ----
+function buildConsultingStyle() {
+  return `
+    <div class="cons-wrapper">
+      <div class="cons-header">
+        <div class="cons-name-title">
+          <h1 class="cons-name">${getName()}</h1>
+          <div class="cons-title">${getTitle()}</div>
+        </div>
+        <div class="cons-contact">${resumeContactItems('consulting-style')}</div>
+      </div>
+      <div class="cons-body">
+        ${renderOrderedSections(['summary', 'experience', 'education', 'skills', 'languages', 'certifications', 'projects', 'internships', 'activities', 'hobbies', 'courses', 'references', 'qualities', 'achievements', 'custom', 'signature', 'footer'])}
+      </div>
+    </div>
+  `;
+}
+
+// ---- Academic CV ----
+function buildAcademicCv() {
+  return `
+    <div class="acad-wrapper">
+      <div class="acad-header">
+        <h1 class="acad-name">${getName()}</h1>
+        <div class="acad-title">${getTitle()}</div>
+        <div class="acad-contact">${resumeContactItems('academic-cv')}</div>
+      </div>
+      <div class="acad-body">
+        ${renderOrderedSections(['summary', 'education', 'experience', 'projects', 'certifications', 'skills', 'languages', 'internships', 'activities', 'hobbies', 'courses', 'references', 'qualities', 'achievements', 'custom', 'signature', 'footer'])}
+      </div>
+    </div>
+  `;
+}
+
+// ---- Infographic ----
+function buildInfographic() {
+  const sideSections = ['skills', 'languages', 'hobbies', 'qualities'];
+  const mainSections = orderedVisibleSectionIds(state.sectionOrder).filter(id => !sideSections.includes(id));
+  return `
+    <div class="info-layout">
+      <aside class="info-sidebar">
+        ${avatarHtml()}
+        <div class="info-contact">${resumeContactItems('infographic')}</div>
+        ${renderOrderedSections(sideSections)}
+      </aside>
+      <main class="info-main">
+        <div class="info-header">
+          <h1 class="info-name">${getName()}</h1>
+          <div class="info-title">${getTitle()}</div>
+        </div>
+        ${renderOrderedSections(mainSections)}
+      </main>
+    </div>
+  `;
+}
+
+// ---- Modern Executive ----
+function buildModernExecutive() {
+  const sideSections = ['education', 'skills', 'languages', 'certifications', 'qualities', 'courses', 'references', 'hobbies'];
+  const mainSections = orderedVisibleSectionIds(state.sectionOrder).filter(id => !sideSections.includes(id));
+  
+  return `
+    <div class="exec-layout">
+      <div class="exec-header">
+        <div class="exec-header-top">
+          ${state.photo ? avatarHtml('exec-avatar', 'exec-avatar-placeholder') : ''}
+          <div class="exec-title-block">
+            <h1 class="exec-name">${getName()}</h1>
+            <div class="exec-title">${getTitle()}</div>
+          </div>
+        </div>
+        <div class="exec-divider"></div>
+        <div class="exec-contact-grid">
+          ${resumeContactItems('modern-executive')}
+        </div>
+      </div>
+      
+      <div class="exec-columns">
+        <div class="exec-main-col">
+          ${renderOrderedSections(mainSections)}
+        </div>
+        <aside class="exec-side-col">
+          ${renderOrderedSections(sideSections)}
+        </aside>
+      </div>
+    </div>
+  `;
+}
+
+// ---- Elite ----
+function buildElite() {
+  const sideSections = ['skills', 'languages', 'education', 'certifications', 'hobbies', 'qualities'];
+  const mainSections = orderedVisibleSectionIds(state.sectionOrder).filter(id => !sideSections.includes(id));
+
+  return `
+    <div class="elite-layout">
+      <header class="elite-header">
+        <div class="elite-header-bg"></div>
+        <div class="elite-header-content">
+          <div class="elite-name-box">
+            <h1 class="elite-name">${getName()}</h1>
+            <div class="elite-title">${getTitle()}</div>
+          </div>
+          <div class="elite-contact-bar">${resumeContactItems('elite')}</div>
+        </div>
+      </header>
+      <div class="elite-body">
+        <aside class="elite-sidebar">
+          <div class="elite-avatar-container">
+            ${state.photo ? avatarHtml('elite-avatar', 'elite-avatar-placeholder') : ''}
+          </div>
+          <div class="elite-sidebar-content">
+            ${renderOrderedSections(sideSections)}
+          </div>
+        </aside>
+        <main class="elite-main">
+          ${renderOrderedSections(mainSections)}
+        </main>
+      </div>
+    </div>
+  `;
+}
+
 // ---- Editorial ----
 function buildEditorial() {
   return `
@@ -3569,6 +4003,56 @@ function renderSectionsByList(ids) {
     .filter((id, index) => ids.indexOf(id) === index && order.includes(id) && visible.includes(id))
     .map(id => sectionMap[id] ? sectionMap[id]() : '')
     .join('');
+}
+
+function collectPdfLinks(root, pageWidthMm, pageHeightMm) {
+  const rootRect = root.getBoundingClientRect();
+  const pxToMm = pageWidthMm / rootRect.width;
+  const links = [];
+
+  root.querySelectorAll('a[href]').forEach(anchor => {
+    const href = anchor.getAttribute('href');
+    if (!href || href === '#') return;
+
+    anchor.getClientRects && Array.from(anchor.getClientRects()).forEach(rect => {
+      if (!rect.width || !rect.height) return;
+
+      const x = (rect.left - rootRect.left) * pxToMm;
+      const y = (rect.top - rootRect.top) * pxToMm;
+      const width = rect.width * pxToMm;
+      const height = rect.height * pxToMm;
+      const firstPage = Math.floor(y / pageHeightMm);
+      const lastPage = Math.floor((y + height) / pageHeightMm);
+
+      for (let page = firstPage; page <= lastPage; page += 1) {
+        const pageTop = page * pageHeightMm;
+        const clippedTop = Math.max(y, pageTop);
+        const clippedBottom = Math.min(y + height, pageTop + pageHeightMm);
+        if (clippedBottom <= clippedTop) continue;
+
+        links.push({
+          page,
+          href,
+          x,
+          y: clippedTop - pageTop,
+          width,
+          height: clippedBottom - clippedTop
+        });
+      }
+    });
+  });
+
+  return links;
+}
+
+function applyPdfLinks(pdf, links) {
+  const pageCount = pdf.getNumberOfPages ? pdf.getNumberOfPages() : 0;
+  links.forEach(link => {
+    const pageNumber = link.page + 1;
+    if (pageNumber < 1 || (pageCount && pageNumber > pageCount)) return;
+    if (pdf.setPage) pdf.setPage(pageNumber);
+    pdf.link(link.x, link.y, link.width, Math.max(link.height, 3), { url: link.href });
+  });
 }
 
 // ---- Download PDF ----
@@ -3651,6 +4135,7 @@ function bindDownloadBtn() {
       const pdf = new PDFCtor('p', 'mm', 'a4');
       const pageWidth = 210;
       const pageHeight = 297;
+      const pdfLinks = collectPdfLinks(exportElement, pageWidth, pageHeight);
       const imgData = canvas.toDataURL('image/jpeg', 0.98);
       const imgHeight = (canvas.height * pageWidth) / canvas.width;
       let position = 0;
@@ -3666,6 +4151,7 @@ function bindDownloadBtn() {
         heightLeft -= pageHeight;
       }
 
+      applyPdfLinks(pdf, pdfLinks);
       pdf.save(fn);
     } catch (err) {
       console.error('PDF export failed', err);
